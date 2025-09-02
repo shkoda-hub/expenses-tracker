@@ -4,27 +4,27 @@ import { mockedMongooseModel } from '../../test/mocks/mongoose-model.mock';
 import { getModelToken } from '@nestjs/mongoose';
 import { CreateExpenseDTO } from './dto/create-expense.dto';
 import { Category } from '../shared/enums/categories.enum';
-import { CurrenciesEnum } from '../shared/enums/currencies.enum';
+import { Currency } from '../shared/enums/currencies.enum';
 import { ClassifierService } from '../classifier/classifier.service';
 import { RedisService } from '../redis/redis.service';
 
 describe('ExpensesService', () => {
   const userId = '123456789';
-  const expenseId = '123456789';
+  const expenseId = '68b74175781acd2f659e0231';
 
   const createExpenseDto: CreateExpenseDTO = {
     amount: 100,
     category: Category.CINEMA,
-    currency: CurrenciesEnum.USD,
+    currency: Currency.USD,
     description: 'test',
     merchant: 'test',
   };
 
   const mockedExpenseDocument = {
-    id: expenseId,
+    _id: expenseId,
     amount: 100,
     category: Category.CINEMA,
-    currency: CurrenciesEnum.USD,
+    currency: Currency.USD,
     description: 'test',
     merchant: 'test',
     createdAt: new Date(),

@@ -10,4 +10,5 @@ export enum Category {
   CINEMA = 'cinema',
   PRODUCTS_AND_SUPERMARKETS = 'products-and-supermarkets',
   CLOTHES_AND_SHOES = 'clothes-and-shoes',
+  GADGETS_AND_ELECTRONICS = 'gadgets-and-electronics',
 }

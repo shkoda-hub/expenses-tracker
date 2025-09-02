@@ -1,0 +1,19 @@
+services:
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: dev
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./src:/app/src
+    networks:
+      - expenses-tracker
+    depends_on:
+      mongodb:
+        condition: service_started
+      redis:
+        condition: service_started

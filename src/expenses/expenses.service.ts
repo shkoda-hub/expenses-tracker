@@ -3,7 +3,7 @@ import { CreateExpenseDTO } from './dto/create-expense.dto';
 import { ExpenseDto } from './dto/expense.dto';
 import { UpdateExpenseDTO } from './dto/update-expense.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { Expense } from './schemas/expense.schema';
 import { ClassifierService } from '../classifier/classifier.service';
 import { RedisService } from '../redis/redis.service';
@@ -78,6 +78,10 @@ export class ExpensesService {
   }
 
   async findOne(userId: string, expenseId: string): Promise<ExpenseDto> {
+    if (!isValidObjectId(expenseId)) {
+      throw new NotFoundException(`Expense with id ${expenseId} not found`);
+    }
+
     const expense = await this.expenseModel
       .findOne({ _id: expenseId, userId })
       .lean();

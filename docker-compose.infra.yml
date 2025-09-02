@@ -1,0 +1,27 @@
+networks:
+  expenses-tracker:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - expenses-tracker
+
+  mongodb:
+    image: mongo:7.0
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - expenses-tracker
