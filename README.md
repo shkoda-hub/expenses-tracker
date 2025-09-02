@@ -52,6 +52,11 @@ To run prod mode
 make up-prod
 ```
 
+To stop containers
+```
+make down
+```
+
 Run tests
 ```bash
 make run-test
